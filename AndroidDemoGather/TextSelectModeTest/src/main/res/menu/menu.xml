@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/it_all"
+        android:title="全选"
+        android:icon="@drawable/all"
+        />
+    <item
+        android:id="@+id/it_copy"
+        android:title="复制"
+        android:icon="@drawable/copy"
+        />
+    <item
+        android:id="@+id/it_cut"
+        android:title="剪切"
+        android:icon="@drawable/cut"
+        />
+    <item
+        android:id="@+id/it_paste"
+        android:title="粘帖"
+        />
+</menu>

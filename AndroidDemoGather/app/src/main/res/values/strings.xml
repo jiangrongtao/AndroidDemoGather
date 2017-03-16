@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DrawableDome</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="drawable_name">
+        <item>BitmapDrawable</item>
+        <item>LayerDrawable</item>
+        <item>StateListDrawable</item>
+        <item>LevelListDrawable</item>
+        <item>TransitionDrawable</item>
+        <item>InsertDrawable</item>
+        <item>ClipDrawable</item>
+        <item>自定义Drawable</item>
+    </string-array>
+    <string name="title_activity_drawable_detail">DrawableDetailActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/nv_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/it_yase"
+            android:checked="true"
+            android:icon="@drawable/ic_project_pressed"
+            android:title="亚瑟" />
+        <item
+            android:id="@+id/it_houyi"
+            android:icon="@drawable/ic_home_pre"
+            android:title="后羿" />
+        <item
+            android:id="@+id/it_luban"
+            android:icon="@drawable/ic_mycenter_pressed"
+            android:title="鲁班" />
+
+    </group>
+    <item
+        android:icon="@drawable/ic_authentication"
+        android:title="子菜单">
+        <menu>
+            <item
+                android:id="@+id/sb_item1"
+                android:icon="@drawable/ic_home_pre"
+                android:title="子条目1" />
+            <item
+                android:id="@+id/sb_item2"
+                android:icon="@drawable/ic_home_pre"
+                android:title="子条目2" />
+        </menu>
+    </item>
+</menu>

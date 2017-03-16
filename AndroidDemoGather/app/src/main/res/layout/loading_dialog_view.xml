@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/dialog_view" 
+	android:orientation="horizontal"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+	android:minWidth="280dip"
+	android:gravity="center"
+	>
+	<!--<ProgressBar
+  		android:layout_width="wrap_content"
+  		android:layout_height="wrap_content"
+  		android:indeterminateDrawable="@drawable/loading_dailog_progress"
+  		/>-->
+	<com.ant.liao.GifView
+		android:id="@+id/gifView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		>
+	</com.ant.liao.GifView>
+	<TextView 
+	    android:id="@+id/tipTextView"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_marginTop="3dip"
+		android:textSize="16sp"
+		android:layout_marginLeft="15dp"
+		android:textColor="@color/colorPrimary"/>
+</LinearLayout>

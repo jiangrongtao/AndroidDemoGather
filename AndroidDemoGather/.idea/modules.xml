@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DrawableDome.iml" filepath="$PROJECT_DIR$/DrawableDome.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GradLayout/GradLayout.iml" filepath="$PROJECT_DIR$/GradLayout/GradLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TextSelectModeTest/TextSelectModeTest.iml" filepath="$PROJECT_DIR$/TextSelectModeTest/TextSelectModeTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customcameratest/customcameratest.iml" filepath="$PROJECT_DIR$/customcameratest/customcameratest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/navigationviewtest/navigationviewtest.iml" filepath="$PROJECT_DIR$/navigationviewtest/navigationviewtest.iml" />
+    </modules>
+  </component>
+</project>
