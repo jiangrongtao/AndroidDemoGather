@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flowlayout="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+     >
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="X"
+            android:background="@drawable/bt_cancel_selector"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:layout_gravity="right"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+        <com.jrt.flowlayout.view.FlowLayout
+            android:id="@+id/flow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            flowlayout:horizontal_spacing="10dp"
+            flowlayout:vertical_spacing="10dp"
+            />
+</LinearLayout>
