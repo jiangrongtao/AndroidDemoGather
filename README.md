@@ -12,6 +12,8 @@
 
 # customcameratest 自定义照片N连拍
 
+# FlowLayoutTest 两种方式实现Diolog弹出 流式布局
+
 *其他的效果都是小视频，在raw目录下，可以自行下载查看*
 
 具体可以去看CSDN:http://blog.csdn.net/jiang_rong_tao/article/details/
