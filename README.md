@@ -1,18 +1,24 @@
 # AndroidDemoGather（Android开发效果的集合库）
 
-![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/result.gif)
-
 # 协调者布局的使用
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image7.gif)
 
 # GradLayout效果，拖动排序
 
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image5.gif)
+
 # navigationviewtest 侧滑
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/result.gif)
 
 # TextSelectModeTest 文本选中模式
 
 # customcameratest 自定义照片N连拍
 
 # FlowLayoutTest 两种方式实现Diolog弹出 流式布局
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image6.gif)
 
 # ImageSliderTest 炫酷的轮播效果
 
