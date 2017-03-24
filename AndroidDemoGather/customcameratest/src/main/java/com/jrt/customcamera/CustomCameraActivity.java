@@ -1,14 +1,19 @@
 package com.jrt.customcamera;
 
+import android.animation.Animator;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
 import java.io.File;
@@ -57,8 +62,9 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
          * 拍照
          * @param view
          */
-
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startCapture(View view) {
+        setViewAnimator(view);
         if (mCamera != null) {
             Camera.Parameters parameters = mCamera.getParameters();
             //设置拍照的图片格式
@@ -78,6 +84,14 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
             });
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void setViewAnimator(View view) {
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, view.getWidth()/2, view.getWidth() / 4);
+        circularReveal.setInterpolator(new LinearInterpolator());
+        circularReveal.setDuration(100);
+        circularReveal.start();
+    }
+
     /**
      * 拍摄成功后对图片的处理
      */
