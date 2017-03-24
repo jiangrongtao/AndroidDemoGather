@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--上拉加载的进度条颜色-->
+    <color name="start_color">#f421db</color>
+    <color name="center_color">#92f421</color>
+    <color name="end_color">#2175f4</color>
+</resources>
