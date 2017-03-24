@@ -25,11 +25,9 @@
 *基于开源项目：https://github.com/daimajia/AndroidImageSlider(有改动)
 
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image1.gif)
-
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image2.gif)
 
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image3.gif)
-
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image4.gif)
 
 # RefreshXView 下拉刷新，上拉加载，基于SwipeRefreshLayout和ListView
