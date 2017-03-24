@@ -3,6 +3,8 @@ package com.jrt.refreshxview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.LoginFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG ="MainActivity";
     private SwipeRefreshListView mSRListview;
     private MainActivity mContext;
     private ArrayList<String> mList=null;
@@ -105,19 +108,23 @@ public class MainActivity extends AppCompatActivity {
     private void initHeaderView() {
         View headerView = View.inflate(mContext, R.layout.header_layout, null);
         mSlider = (SliderLayout)headerView.findViewById(R.id.slider);
-        HashMap<String,Integer> fileMaps = new HashMap<String, Integer>();
-        fileMaps.put("banner1", R.drawable.banner1);
-        fileMaps.put("banner2",R.drawable.banner2);
-        fileMaps.put("banner3",R.drawable.banner3);
-        fileMaps.put("banner4",R.drawable.banner4);
-        fileMaps.put("banner5",R.drawable.banner5);
-
-        for(String name : fileMaps.keySet()){
+//        HashMap<String,Integer> fileMaps = new HashMap<String, Integer>();
+//        fileMaps.put("banner1", R.drawable.banner1);
+//        fileMaps.put("banner2",R.drawable.banner2);
+//        fileMaps.put("banner3",R.drawable.banner3);
+//        fileMaps.put("banner4",R.drawable.banner4);
+//        fileMaps.put("banner5",R.drawable.banner5);
+        HashMap<String,String> urlMaps = new HashMap<String, String>();
+        urlMaps.put("banner1", "http://p3.so.qhimgs1.com/bdr/326__/t010679f343b8526d23.jpg");
+        urlMaps.put("banner2","http://p4.so.qhmsg.com/bdr/326__/t01ccb97fa44b1b9ca9.jpg");
+        urlMaps.put("banner3","http://p1.so.qhimgs1.com/bdr/326__/t0121927b824630899d.jpg");
+        for(String name : urlMaps.keySet()){
             TextSliderView textSliderView = new TextSliderView(mContext);
             // initialize a SliderLayout
             textSliderView.description(name)
-                          .image(fileMaps.get(name))
+                          .image(urlMaps.get(name))
                           .setScaleType(BaseSliderView.ScaleType.Fit);
+            Log.i(TAG, "initHeaderView:= "+urlMaps.get(name));
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
