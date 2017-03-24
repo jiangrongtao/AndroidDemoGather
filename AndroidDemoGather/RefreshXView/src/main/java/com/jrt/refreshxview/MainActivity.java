@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.text.LoginFilter;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -71,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
         mSRListview.setRefreshing(true);//刚进来显示加载进度条
         mAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, initData(AutoLoadState.NORMAL));
         mSRListview.setAdapter(mAdapter);
+        ListView listView = mSRListview.getRefreshableView();
+        //设置条目加载的动画 ORDER_NORMAL顺序加载  ORDER_RANDOM随机加载  ORDER_REVERSE逆序加载
+        LayoutAnimationController mLac=
+                new LayoutAnimationController(
+                        AnimationUtils.loadAnimation(
+                                this, R.anim.my_splash_in));
+        mLac.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        listView.setLayoutAnimation(mLac);
+        listView.startLayoutAnimation();
         mSRListview.doComplete();//完成初始化 隐藏进度条
     }
 
