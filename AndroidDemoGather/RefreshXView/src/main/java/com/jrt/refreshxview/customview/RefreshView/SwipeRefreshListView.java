@@ -21,8 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by monch on 15/6/16.
- */
+ SwipeRefreshLayout下拉刷新，上拉加载更多
+ **/
 public class SwipeRefreshListView extends SwipeRefreshLayout implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener{
 
     private static final int AUTO_REFRESH = 1, STOP_REFRESH = 2;
