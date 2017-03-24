@@ -35,6 +35,7 @@
 # RefreshXView 下拉刷新，上拉加载，基于SwipeRefreshLayout和ListView
 
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image8.gif)
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image9.gif)
 
 *其他的效果都是小视频，在raw目录下，可以自行下载查看*
 
