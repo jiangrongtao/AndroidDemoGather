@@ -35,6 +35,12 @@
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image8.gif)
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image9.gif)
 
+# BottomNavigationTest一个基于bottom-navigation-bar的底部导航栏的快速实现
+*源项目：https://github.com/Ashok-Varma/BottomNavigation；我对源码进行扩充提供了BottomNavigationBar和ViewPager的绑定方法bindViewPager(final ViewPager viewPager)
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image10.gif)
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image11.gif)
+
 *其他的效果都是小视频，在raw目录下，可以自行下载查看*
 
 具体可以去看CSDN:http://blog.csdn.net/jiang_rong_tao/article/details/
