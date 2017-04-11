@@ -14,7 +14,9 @@
 
 # TextSelectModeTest 文本选中模式
 
-# customcameratest 自定义照片N连拍
+# customcameratest 自定义照片N连拍（模拟器不支持摄像头只能放个图片了）
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image.png)
 
 # FlowLayoutTest 两种方式实现Diolog弹出 流式布局
 
