@@ -45,6 +45,9 @@
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image10.gif)
 ![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/image11.gif)
 
+#BitmapMeshTest是对canvas.drawBitmapMesh的简单使用，可以使用代码对图片进行动态处理
+
+![image](https://github.com/jiangrongtao/AndroidDemoGather/blob/master/AndroidDemoGather/raw/hongqi.gif)
 *其他的效果都是小视频，在raw目录下，可以自行下载查看*
 
 具体可以去看CSDN:http://blog.csdn.net/jiang_rong_tao/article/details/
