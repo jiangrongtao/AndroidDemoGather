@@ -1,11 +1,16 @@
 package com.jrt.customcamera;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,11 +18,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
+import com.jrt.customcamera.utils.PermisionUtils;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -35,10 +43,24 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     private SurfaceView mSurfaceView;
     private Camera mCamera;
     private SurfaceHolder mSurfaceViewHolder;
+    /**
+     * 摄像头类型（前置/后置），默认后置
+     */
+    protected int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+    private static final int TAKE_PHOTO_REQUEST_CODE = 2;
+    private CustomCameraActivity mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         setContentView(R.layout.activity_custom_camera);
+        mContext = this;
+        PermisionUtils.verifyStoragePermissions(mContext);
         init();
     }
 
@@ -53,40 +75,55 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
             public void onClick(View view) {
                 mCamera.autoFocus(null);
                 //平滑的缩放：取值在0~mCamera.getParameters().getMaxZoom()
-//                 mCamera.startSmoothZoom(2);
+                mCamera.startSmoothZoom(2);
             }
         });
     }
 
-        /**
-         * 拍照
-         * @param view
-         */
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    /**
+     * 拍照
+     *
+     * @param view
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void startCapture(View view) {
-        setViewAnimator(view);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setViewAnimator(view);
+        }
         if (mCamera != null) {
+            Log.i(TAG, "startCapture: 拍照");
             Camera.Parameters parameters = mCamera.getParameters();
             //设置拍照的图片格式
             parameters.setPictureFormat(ImageFormat.JPEG);
             //设置图片的预览大小
             parameters.setPreviewSize(200, 300);
+            //解决只能拍一张图片的bug
+            setStartPreview(mCamera, mSurfaceViewHolder);
             //设置自动对焦
             parameters.setFocusMode(Camera.Parameters.ANTIBANDING_AUTO);
-            mCamera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean success, Camera camera) {
-                    //动态对对焦成功后，获取拍摄的图片
-                    if (success) {
-                        camera.takePicture(null, null, mPictureCallback);
+            if (mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                mCamera.autoFocus(new Camera.AutoFocusCallback() {
+                    @Override
+                    public void onAutoFocus(boolean success, Camera camera) {
+                        //动态对对焦成功后，获取拍摄的图片
+                        if (success) {
+                            Log.i(TAG, "startCapture: 对焦成功");
+                            camera.takePicture(null, null, mPictureCallback);
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                //前摄像头拍照
+                mCamera.autoFocus(null);
+                SystemClock.sleep(1000);//模拟对焦
+                mCamera.takePicture(null, null, mPictureCallback);
+            }
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setViewAnimator(View view) {
-        Animator circularReveal = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, view.getWidth()/2, view.getWidth() / 4);
+        Animator circularReveal = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, view.getWidth() / 2, view.getWidth() / 4);
         circularReveal.setInterpolator(new LinearInterpolator());
         circularReveal.setDuration(100);
         circularReveal.start();
@@ -96,9 +133,10 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
      * 拍摄成功后对图片的处理
      */
     private Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
+
+
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-
             if (Environment.getExternalStorageState().equals(
                     Environment.MEDIA_MOUNTED)) {
                 FileOutputStream fileOutputStream = null;
@@ -134,7 +172,11 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
      * @return
      */
     private Camera getCamera() {
-        mCamera = Camera.open();
+        if (mCameraId == Camera.CameraInfo.CAMERA_FACING_BACK) {
+            mCamera = Camera.open();
+        } else {
+            mCamera = Camera.open(mCameraId);
+        }
         return mCamera;
     }
 
@@ -188,6 +230,22 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == TAKE_PHOTO_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                mCamera = getCamera();
+                if (mSurfaceViewHolder != null) {
+                    setStartPreview(mCamera, mSurfaceViewHolder);
+                }
+            } else {
+                // Permission Denied
+            }
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         releaseCamera();
@@ -217,7 +275,6 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
         Log.i(TAG, "surfaceDestroyed: ");
         releaseCamera();
     }
-
     // 使用系统当前日期加以调整作为照片的名称
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
@@ -225,4 +282,62 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
                 "'IMG'_yyyyMMdd_HHmmss");
         return dateFormat.format(date) + ".jpg";
     }
+
+    /*****************************************摄像头切换************************************************/
+    /**
+     * 是否支持前置摄像头
+     */
+    @SuppressLint("NewApi")
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static boolean isSupportFrontCamera() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+            //2.3以下设备
+            return false;
+        }
+        int numberOfCameras = Camera.getNumberOfCameras();
+        if (2 == numberOfCameras) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 切换摄像头
+     *
+     * @param view
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void switchCamera(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setViewAnimator(view);
+        }
+        if (isFrontCamera()) {
+            Log.i(TAG, "switchCamera: isFrontCamera()=" + isFrontCamera());
+            switchCamera(Camera.CameraInfo.CAMERA_FACING_BACK);
+        } else {
+            if (isSupportFrontCamera()) {
+                Log.i(TAG, "switchCamera: isSupportFrontCamera()=" + isSupportFrontCamera());
+                switchCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
+            } else {
+                Toast.makeText(this, "当前设备不支持前摄像头", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void switchCamera(int cameraFacing) {
+        mCameraId = cameraFacing;
+        releaseCamera();
+        mCamera = getCamera();
+        setStartPreview(mCamera, mSurfaceViewHolder);
+    }
+
+    /**
+     * 是否前置摄像头
+     */
+    public boolean isFrontCamera() {
+        return mCameraId == Camera.CameraInfo.CAMERA_FACING_FRONT;
+    }
+
 }
+

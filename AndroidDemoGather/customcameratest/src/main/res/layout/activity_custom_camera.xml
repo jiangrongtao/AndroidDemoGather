@@ -18,4 +18,12 @@
         android:layout_marginBottom="16dp"
         android:onClick="startCapture"
         />
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/change_bt_bg"
+        android:onClick="switchCamera"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        />
 </RelativeLayout>

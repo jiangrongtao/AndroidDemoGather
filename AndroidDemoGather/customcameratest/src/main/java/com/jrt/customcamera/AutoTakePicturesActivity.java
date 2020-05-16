@@ -70,6 +70,7 @@ public class AutoTakePicturesActivity extends AppCompatActivity implements Surfa
             parameters.setPreviewSize(200, 300);
             //设置自动对焦
             parameters.setFocusMode(Camera.Parameters.ANTIBANDING_AUTO);
+            Log.d(TAG, "startCapture: "+parameters.getFocusMode());
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {
@@ -192,9 +193,9 @@ public class AutoTakePicturesActivity extends AppCompatActivity implements Surfa
         super.onResume();
         if (mCamera == null) {
             mCamera = getCamera();
-            if (mSurfaceViewHolder != null) {
-                setStartPreview(mCamera, mSurfaceViewHolder);
-            }
+//            if (mSurfaceViewHolder != null) {
+//                setStartPreview(mCamera, mSurfaceViewHolder);
+//            }
         }
     }
 
@@ -213,7 +214,7 @@ public class AutoTakePicturesActivity extends AppCompatActivity implements Surfa
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         Log.i(TAG, "surfaceCreated: ");
-        setStartPreview(mCamera, mSurfaceViewHolder);
+//        setStartPreview(mCamera, mSurfaceViewHolder);
     }
 
     @Override
